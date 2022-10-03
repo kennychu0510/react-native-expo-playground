@@ -6,7 +6,7 @@ import React from 'react';
 import { RootStackParamList } from './types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import Calculator from './Calculator'
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -77,7 +77,7 @@ function SettingsScreen({ navigation }) {
 
 function ModalScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.centeredView}>
       <Text style={{ fontSize: 30 }}>This is a modal!</Text>
       <Button onPress={() => navigation.goBack()} title="Dismiss" />
     </View>
@@ -108,20 +108,29 @@ function SettingsStackScreen() {
   )
 }
 
+
+
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false, }}>
-        <Tab.Screen name="Home" component={HomeStackScreen} options={{
+        <Tab.Screen name="HomeStack" component={HomeStackScreen} options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
-          )
+          ),
+          title: 'Home'
         }} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} options={{
+        <Tab.Screen name="SettingsStack" component={SettingsStackScreen} options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" color={color} size={size} />
-          )
+          ),
+          title: 'Settings'
         }} />
+        <Tab.Screen name="Calculator" component={Calculator} options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calculator-outline" color={color} size={size} />
+          ),
+        }}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
